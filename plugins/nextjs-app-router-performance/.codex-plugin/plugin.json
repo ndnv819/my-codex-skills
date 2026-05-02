@@ -1,0 +1,32 @@
+{
+  "name": "nextjs-app-router-performance",
+  "version": "0.1.0",
+  "description": "Next.js App Router performance assistant for fast initial loading, server-first data flow, explicit caching, and safe code splitting.",
+  "author": {
+    "name": "Jiah Lee"
+  },
+  "repository": "https://github.com/ndnv819/my-codex-skills",
+  "license": "MIT",
+  "keywords": [
+    "nextjs",
+    "next",
+    "app-router",
+    "react",
+    "performance",
+    "initial-load",
+    "server-components",
+    "server-actions",
+    "data-fetching",
+    "code-splitting",
+    "dynamic-import",
+    "frontend"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Next.js App Router Performance",
+    "shortDescription": "App Router initial-load checks, server-first data flow, and safe code-splitting guidance.",
+    "longDescription": "Next.js App Router performance assistant for fast initial loading, server-first data flow, explicit caching, and safe code splitting. Runs production builds, checks server/client boundaries, flags risky client imports and providers, and keeps ordinary app data reads on the server.",
+    "developerName": "Jiah Lee",
+    "category": "Productivity"
+  }
+}

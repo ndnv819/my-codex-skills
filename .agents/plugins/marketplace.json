@@ -1,0 +1,32 @@
+{
+  "name": "my-codex-skills",
+  "interface": {
+    "displayName": "My Codex Skills"
+  },
+  "plugins": [
+    {
+      "name": "react-performance",
+      "source": {
+        "source": "local",
+        "path": "./plugins/react-performance"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "nextjs-app-router-performance",
+      "source": {
+        "source": "local",
+        "path": "./plugins/nextjs-app-router-performance"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

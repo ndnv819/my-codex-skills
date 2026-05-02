@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My Codex Skills
 
-## Getting Started
+Local Codex plugin marketplace for the plugins in this repository.
 
-First, run the development server:
+## Installation
+
+From the repository root, add the marketplace:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+codex plugin marketplace add .
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then restart Codex, open `/plugins`, and enable the plugins you want from **My Codex Skills**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Plugins
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Plugin | Exposed skill | Use for |
+| --- | --- | --- |
+| [nextjs-app-router-performance](./plugins/nextjs-app-router-performance/) | `nextjs-initial-load-audit`, `nextjs-server-data-flow` | App Router initial-load checks, server/client boundary review, provider placement, server-first data flow, and safe code splitting. |
+| [react-performance](./plugins/react-performance/) | `react-render-optimization` | React render profiling, unnecessary re-render reduction, memoization review, and list optimization. |
 
-## Learn More
+## Structure
 
-To learn more about Next.js, take a look at the following resources:
+The repository only needs to expose the marketplace index, plugin manifests, and skill folders. Plugin-specific scripts or references stay inside the owning plugin.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+.agents/plugins/marketplace.json
+plugins/
+  <plugin-name>/
+    .codex-plugin/plugin.json
+    README.md
+    scripts/  # optional
+    skills/<skill-name>/references/  # optional
+    skills/<skill-name>/SKILL.md
+scripts/validate-plugins.sh
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Each plugin is registered with a `.codex-plugin/plugin.json` manifest and the repo-level marketplace index.
 
-## Deploy on Vercel
+## Validation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+./scripts/validate-plugins.sh
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The validation script checks that the marketplace entries point to existing plugin directories and that every plugin has a valid Codex manifest.

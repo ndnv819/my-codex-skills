@@ -1,0 +1,26 @@
+{
+  "name": "react-performance",
+  "version": "0.1.0",
+  "description": "React performance assistant for profiling, render optimization, memoization review, list tuning, and validation guidance.",
+  "author": {
+    "name": "Jiah Lee"
+  },
+  "repository": "https://github.com/ndnv819/my-codex-skills",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "components",
+    "performance",
+    "profiling",
+    "memoization",
+    "frontend"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "React Performance",
+    "shortDescription": "React profiling, render optimization, and validation guidance.",
+    "longDescription": "React performance assistant for profiling, render optimization, memoization review, list tuning, and validation guidance. Helps Codex diagnose slow renders, reduce unnecessary re-renders, stabilize props, virtualize lists, and validate improvements with profiling evidence.",
+    "developerName": "Jiah Lee",
+    "category": "Productivity"
+  }
+}
