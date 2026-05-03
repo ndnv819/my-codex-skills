@@ -6,29 +6,37 @@ argument-hint: "[--project path] [--no-build] [--json]"
 
 # Next.js Initial Load Audit
 
-Use this skill to keep App Router initial loading fast without inventing page-level kB thresholds.
+## Purpose
 
-## Core Rule
+Use this skill to keep Next.js App Router initial loading fast without inventing page-level kB thresholds.
 
-After meaningful App Router page, layout, Client Component, provider, dependency, or styling-library changes, run a production build and inspect initial-load risks before the final response.
+## Use When
 
-Do not define a universal recommended page size. Current Next.js docs do not publish a numeric App Router route JavaScript budget, and Next.js 16 removed JS bundle size metrics from `next build`. Use project-defined budgets only when the project explicitly provides them.
+- Working on App Router routes, layouts, templates, Client Components, providers, or styling libraries.
+- Adding, replacing, or importing heavy UI, browser, visualization, editor, document, map, or export libraries.
+- Reviewing dynamic imports, bundle analysis, route graphs, first-viewport behavior, or frontend changes that may affect initial load.
 
-Official reference points:
+## Core Rules
 
-- `next build` verifies production compilation and route generation.
-- `next experimental-analyze --output` is the official Turbopack bundle analysis path for route/import-chain inspection.
-- Pages Router Large Page Data has an official `128 kB` warning, but that is serialized `__NEXT_DATA__` page data, not an App Router page JS budget.
+- After meaningful App Router page, layout, Client Component, provider, dependency, or styling-library changes, run a production build and inspect initial-load risks before the final response.
+- Do not define a universal recommended page size. Current Next.js docs do not publish a numeric App Router route JavaScript budget, and Next.js 16 removed JS bundle size metrics from `next build`.
+- Use project-defined budgets only when the project explicitly provides them.
+- Treat the Pages Router Large Page Data `128 kB` warning as serialized `__NEXT_DATA__` page data, not as an App Router page JavaScript budget.
 
-Useful official references:
+## Workflow
 
-- https://nextjs.org/docs/app/api-reference/cli/next
-- https://nextjs.org/docs/pages/guides/package-bundling
-- https://nextjs.org/docs/messages/large-page-data
+1. Identify the App Router project root by checking `package.json`, `next.config.*`, `app/`, and `src/app`.
+2. Make the requested change using existing project style.
+3. Run the performance script before finalizing.
+4. Fix build failures first.
+5. Review initial-load risks from the script.
+6. Apply safe code splitting or boundary changes only when behavior is clear.
+7. Rebuild after code-splitting edits.
+8. Report the build command, whether project-defined budgets were configured, and any initial-load risks left unresolved.
 
-## Initial-Load Rules
+## Implementation Guidelines
 
-### Server-First Boundary
+### Server-First Boundaries
 
 Default to Server Components. Keep `page.tsx`, `layout.tsx`, and `template.tsx` server-first unless they truly need client interactivity. Move interactive pieces into small leaf Client Components.
 
@@ -38,13 +46,13 @@ Watch for:
 - client wrappers around entire routes
 - server-only data fetching pushed into Client Components
 
-### Provider Boundary
+### Provider Boundaries
 
 Do not put broad providers in the root layout unless every route needs them during initial render. Move auth, theme, query, tooltip, modal, toast, analytics, editor, or dashboard providers to the smallest subtree that needs them.
 
 Root layout providers are especially sensitive because they can affect every route's initial client graph.
 
-### Heavy Client Library Boundary
+### Heavy Client Library Boundaries
 
 Avoid static initial-render imports for heavy browser/UI libraries:
 
@@ -57,61 +65,25 @@ Avoid static initial-render imports for heavy browser/UI libraries:
 
 Prefer Server Components when the work does not need browser APIs. Otherwise use `next/dynamic` for below-the-fold UI or native `import()` inside user-triggered handlers.
 
-### Above-The-Fold Boundary
+### Above-The-Fold Boundaries
 
 Only load what the first meaningful viewport needs. Modals, drawers, tab contents, admin tools, inspectors, previews, export panels, and collapsed sections should be lazy candidates.
 
 Do not lazy-load SEO-critical or visually essential first-viewport content unless the fallback is intentionally designed.
 
-### Barrel Import Boundary
+### Barrel Import Boundaries
 
 Avoid broad barrels such as `@/components` from route entry files. Prefer direct imports so unrelated Client Components and heavy dependencies do not join the route graph accidentally.
 
-### Data And Streaming Boundary
+### Data And Streaming Boundaries
 
 Fetch only the fields needed to render. Keep large objects and lists out of Client Component props. Use pagination, `loading.tsx`, Suspense, and streaming for slower or non-critical sections.
 
-### Asset And Script Boundary
+### Asset And Script Boundaries
 
 Use `next/image` for first-viewport images when possible, `next/font` for fonts, and `next/script` with an explicit loading strategy for third-party scripts. Avoid loading analytics, widgets, or embeds on the critical path unless the page experience requires them immediately.
 
-## Script
-
-Run from the target Next.js project:
-
-```bash
-${PLUGIN_ROOT}/scripts/nextjs-app-router-performance.sh
-```
-
-Run against an explicit project:
-
-```bash
-${PLUGIN_ROOT}/scripts/nextjs-app-router-performance.sh --project <next-project>
-```
-
-Use JSON when exact risk data is useful:
-
-```bash
-${PLUGIN_ROOT}/scripts/nextjs-app-router-performance.sh --json
-```
-
-Inspect source and existing build output without rebuilding:
-
-```bash
-${PLUGIN_ROOT}/scripts/nextjs-app-router-performance.sh --no-build
-```
-
-## Analyzer Workflow
-
-When route size or import chain needs deeper inspection, prefer the official analyzer:
-
-```bash
-pnpm next experimental-analyze --output
-```
-
-Use the project's package manager. For Webpack-based projects, use the existing `@next/bundle-analyzer` setup if present rather than adding a second analyzer.
-
-## Safe Code-Splitting Patterns
+### Safe Code Splitting
 
 For React components:
 
@@ -141,7 +113,7 @@ async function exportWorkbook() {
 }
 ```
 
-## What Not To Auto-Fix
+### Avoid Automated Fixes
 
 Do not automatically:
 
@@ -151,13 +123,57 @@ Do not automatically:
 - move side-effect imports, global CSS, fonts, metadata, route handlers, or server actions
 - add arbitrary JavaScript budget thresholds
 
-## Workflow
+## Tools And References
 
-1. Identify the App Router project root by checking `package.json`, `next.config.*`, `app/`, and `src/app`.
-2. Make the requested change using existing project style.
-3. Run the performance script before finalizing.
-4. Fix build failures first.
-5. Review initial-load risks from the script.
-6. Apply safe code splitting or boundary changes only when behavior is clear.
-7. Rebuild after code-splitting edits.
-8. Final response should state the build command, whether project-defined budgets were configured, and any initial-load risks left unresolved.
+Run from the target Next.js project:
+
+```bash
+${PLUGIN_ROOT}/scripts/nextjs-app-router-performance.sh
+```
+
+Run against an explicit project:
+
+```bash
+${PLUGIN_ROOT}/scripts/nextjs-app-router-performance.sh --project <next-project>
+```
+
+Use JSON when exact risk data is useful:
+
+```bash
+${PLUGIN_ROOT}/scripts/nextjs-app-router-performance.sh --json
+```
+
+Inspect source and existing build output without rebuilding:
+
+```bash
+${PLUGIN_ROOT}/scripts/nextjs-app-router-performance.sh --no-build
+```
+
+When route size or import chain needs deeper inspection, prefer the official analyzer:
+
+```bash
+pnpm next experimental-analyze --output
+```
+
+Use the project's package manager. For Webpack-based projects, use the existing `@next/bundle-analyzer` setup if present rather than adding a second analyzer.
+
+Useful official references:
+
+- https://nextjs.org/docs/app/api-reference/cli/next
+- https://nextjs.org/docs/pages/guides/package-bundling
+- https://nextjs.org/docs/messages/large-page-data
+
+## Validation
+
+- `next build` verifies production compilation and route generation.
+- `next experimental-analyze --output` is the official Turbopack bundle analysis path for route/import-chain inspection.
+- Rebuild after code-splitting edits and inspect any remaining initial-load risks.
+
+## Reporting
+
+Report:
+
+- the build command that ran and its result
+- whether project-defined budgets were present
+- analyzer or script findings that affect initial load
+- unresolved risks and the reason they were not changed

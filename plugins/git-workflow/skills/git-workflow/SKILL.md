@@ -27,7 +27,18 @@ Use this skill to keep Git work consistent across branches, commits, PRs, issue 
 - Do not silently apply version changes, release commits, tags, or changelog updates. Recommend them and get confirmation unless the user explicitly asked for the edit.
 - Allow local commits to be flexible, but enforce conventions more strictly at PR creation or PR validation time.
 
-## Branch Strategy
+## Workflow
+
+1. Inspect the current branch, status, upstream, recent commits, and issue context before suggesting or applying Git workflow changes.
+2. Detect the issue key from the branch, PR metadata, or configured tracker when available.
+3. Choose the narrowest valid branch type, commit prefix, PR title, version impact, or changelog section for the requested action.
+4. Use the helper script when local Git context needs structured inspection.
+5. Validate generated branch names, commit messages, PR text, and release metadata against the conventions below.
+6. Report any ambiguity, missing issue key, or version impact that needs confirmation.
+
+## Implementation Guidelines
+
+### Branch Strategy
 
 Use these branch types:
 
@@ -65,7 +76,7 @@ docs/update-readme
 
 Branch topics should be lowercase kebab-case. Avoid spaces, underscores, punctuation, and reused merged branch names.
 
-## Issue Keys
+### Issue Keys
 
 Use `issue key` as the generic work item identifier.
 
@@ -84,7 +95,7 @@ Detection order:
 
 When an issue key is confidently detected, append it to generated commit messages and PR titles unless one is already present.
 
-## Commit Messages
+### Commit Messages
 
 Commit messages must use:
 
@@ -128,7 +139,7 @@ Fix: resolve modal scroll lock issue (APP-45)
 Chore: update eslint config
 ```
 
-## Prefix Selection
+### Prefix Selection
 
 Use this guide:
 
@@ -147,7 +158,7 @@ Use this guide:
 
 When both `Add:` and `Update:` are possible, recommend `Add:` for a new capability, new component, new file, or new workflow. Recommend `Update:` for improving existing behavior, UI, UX, copy, or flow. Ask the user when the intent is ambiguous.
 
-## Issue Reference Requirements
+### Issue Reference Requirements
 
 | Prefix | Issue Reference |
 | --- | --- |
@@ -174,7 +185,7 @@ At PR time:
 - Require version impact declaration when applicable.
 - Require tests or validation steps to be documented.
 
-## Auto-Insertion
+### Auto-Insertion
 
 If the user provides:
 
@@ -190,7 +201,7 @@ Add: implement user profile settings (#42)
 
 Do not duplicate issue keys. If a message already contains `(APP-145)`, do not append another `(APP-145)`.
 
-## PR Convention
+### PR Convention
 
 PR titles should match commit message format:
 
@@ -232,13 +243,13 @@ No issue
 
 For GitHub Issues, use `Closes #<issue-number>`. For Jira, use `Related: <JIRA-KEY>`. If no issue key is detected and the change type requires one, ask whether the task has no issue before creating the PR. If the user confirms there is no issue, use `No issue`.
 
-## Merge Strategy
+### Merge Strategy
 
 Default to squash merge. The squash commit message should use the PR title so the `main` history remains clean while local commits can stay flexible on short-lived branches.
 
 Use merge commits only when preserving branch history is required. Avoid rebase merge unless the team explicitly agrees.
 
-## Version Management
+### Version Management
 
 Use Semantic Versioning:
 
@@ -278,7 +289,7 @@ For plugin or monorepo repositories, recommend tags like:
 <package-name>@<version>
 ```
 
-## Changelog
+### Changelog
 
 Released packages or plugins should maintain a changelog. For independent plugin releases, use:
 
@@ -296,7 +307,7 @@ Generate changelog entries from merged PR titles or release commits using this s
 | `Remove:` | `Removed` |
 | `Docs:` | `Documentation` |
 
-## Helper Script
+## Tools And References
 
 Run the helper script when local Git context needs inspection:
 
@@ -305,6 +316,13 @@ ${PLUGIN_ROOT}/scripts/git-workflow.sh --project <project-root> --json
 ```
 
 Use it to validate the current branch, detect issue keys, validate a commit message, suggest issue insertion, generate a PR body template, and show version impact hints.
+
+## Validation
+
+- Validate branch names against the branch strategy before creating or reviewing PRs.
+- Validate commit messages against the approved prefix list, colon spacing, capitalization, subject style, and issue reference rules.
+- Validate PR titles and bodies for issue linkage, version impact, and documented test or validation steps.
+- Validate release work against the SemVer, tag format, and changelog guidance.
 
 ## Reporting
 
