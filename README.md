@@ -19,6 +19,7 @@ Then restart Codex, open `/plugins`, and enable the plugins you want from **My C
 | [nextjs-app-router-performance](./plugins/nextjs-app-router-performance/) | `nextjs-initial-load-audit`, `nextjs-server-data-flow` | App Router initial-load checks, server/client boundary review, provider placement, server-first data flow, and safe code splitting. |
 | [react-performance](./plugins/react-performance/) | `react-render-optimization` | React render profiling, unnecessary re-render reduction, memoization review, and list optimization. |
 | [typescript-vitest](./plugins/typescript-vitest/) | `vitest-test-authoring` | Focused Vitest test authoring and verification for TypeScript behavior changes and refactors. |
+| [storybook-auto-composer](./plugins/storybook-auto-composer/) | `storybook-auto-composer` | Storybook bring-up for React and Next.js projects, including setup, mocks, story generation, interactions, visual baselines, and validation. |
 
 ## Structure
 

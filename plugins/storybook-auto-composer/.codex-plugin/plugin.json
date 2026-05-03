@@ -1,0 +1,29 @@
+{
+  "name": "storybook-auto-composer",
+  "version": "0.1.0",
+  "description": "Storybook bring-up assistant for installing, configuring, mocking, composing stories, adding interactions, generating visual baselines, and validating usable Storybook setups.",
+  "author": {
+    "name": "Jiah Lee"
+  },
+  "repository": "https://github.com/ndnv819/my-codex-skills",
+  "license": "MIT",
+  "keywords": [
+    "storybook",
+    "react",
+    "nextjs",
+    "app-router",
+    "stories",
+    "msw",
+    "interaction-tests",
+    "visual-regression",
+    "frontend"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Storybook Auto Composer",
+    "shortDescription": "Install and complete usable Storybook setups for React and Next.js projects.",
+    "longDescription": "Storybook bring-up assistant for installing Storybook when missing, configuring React and Next.js App Router projects, wiring Next.js runtime mocks, detecting and connecting MSW API mocks, composing runnable .stories.tsx files, adding play-function interactions, generating screenshot baselines, and validating with build/test/browser checks.",
+    "developerName": "Jiah Lee",
+    "category": "Productivity"
+  }
+}
