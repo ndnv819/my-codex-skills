@@ -1,0 +1,26 @@
+{
+  "name": "typescript-vitest",
+  "version": "0.1.0",
+  "description": "TypeScript and Vitest assistant plugin for focused test authoring, coverage-gap checks, and verification after behavior-affecting code changes.",
+  "author": {
+    "name": "Jiah Lee"
+  },
+  "repository": "https://github.com/ndnv819/my-codex-skills",
+  "license": "MIT",
+  "keywords": [
+    "typescript",
+    "vitest",
+    "testing",
+    "unit-tests",
+    "verification",
+    "regression"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "TypeScript Vitest",
+    "shortDescription": "Focused Vitest test authoring for TypeScript changes.",
+    "longDescription": "TypeScript and Vitest assistant plugin for focused test authoring, coverage-gap checks, and verification after behavior-affecting code changes. Helps Codex decide when tests are needed, add targeted Vitest coverage, avoid weak assertions, and run the narrowest useful validation.",
+    "developerName": "Jiah Lee",
+    "category": "Productivity"
+  }
+}

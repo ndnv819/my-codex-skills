@@ -1,0 +1,7 @@
+interface:
+  display_name: "Vitest Test Authoring"
+  short_description: "Write and verify focused Vitest tests for TypeScript"
+  default_prompt: "Use $vitest-test-authoring to add focused Vitest coverage for this TypeScript change."
+
+policy:
+  allow_implicit_invocation: true
