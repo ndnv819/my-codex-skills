@@ -1,0 +1,30 @@
+{
+  "name": "git-workflow",
+  "version": "0.1.0",
+  "description": "Git workflow assistant for branch naming, commit and PR conventions, issue key handling, SemVer recommendations, release tags, and changelog guidance.",
+  "author": {
+    "name": "Jiah Lee"
+  },
+  "repository": "https://github.com/ndnv819/my-codex-skills",
+  "license": "MIT",
+  "keywords": [
+    "git",
+    "workflow",
+    "branching",
+    "commits",
+    "pull-requests",
+    "semver",
+    "release",
+    "changelog",
+    "github",
+    "jira"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Git Workflow",
+    "shortDescription": "Branch, commit, PR, version, tag, and changelog convention guidance.",
+    "longDescription": "Git workflow assistant for branch naming, commit and PR conventions, issue key handling across GitHub Issues and Jira, SemVer recommendations, release tag names, and changelog guidance. Helps Codex validate local workflow state, generate convention-compliant commit messages and PR bodies, and recommend version impact without silently applying releases.",
+    "developerName": "Jiah Lee",
+    "category": "Productivity"
+  }
+}
