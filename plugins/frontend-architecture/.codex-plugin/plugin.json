@@ -1,0 +1,38 @@
+{
+  "name": "frontend-architecture",
+  "version": "0.1.0",
+  "description": "Frontend architecture scaffold and audit tools, currently including React layered architecture for Next.js App Router and Expo Router.",
+  "author": {
+    "name": "Jiah Lee"
+  },
+  "repository": "https://github.com/ndnv819/my-codex-skills",
+  "license": "MIT",
+  "keywords": [
+    "frontend",
+    "react",
+    "nextjs",
+    "expo",
+    "architecture",
+    "layered-architecture",
+    "scaffold",
+    "typescript",
+    "biome"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Frontend Architecture",
+    "shortDescription": "Scaffold and audit frontend project structures, starting with React layered architecture.",
+    "longDescription": "Frontend architecture helper plugin. The first included skill scaffolds and audits React projects using Next.js App Router or Expo Router with a src-based 3-layer structure, strict TypeScript, @/* path aliases, root .env.example, Zod env validation, optional Biome setup, feature modules, and architecture boundary checks.",
+    "developerName": "Jiah Lee",
+    "category": "Productivity",
+    "capabilities": [
+      "Write",
+      "Analyze"
+    ],
+    "defaultPrompt": [
+      "Build a Next.js App Router project structure with React layered architecture.",
+      "Add a feature module to this React layered architecture project.",
+      "Audit this project's frontend architecture boundaries."
+    ]
+  }
+}
